@@ -632,6 +632,10 @@ h3 {
 
 
   /* skills */
+  .skills {
+    background-attachment: scroll;
+  }
+
   .works-container {
     flex-wrap: wrap;
   }
@@ -645,6 +649,12 @@ h3 {
   /* services */
   .services-inner {
     flex-direction: column;
+  }
+
+
+  /* works */
+  .works {
+    background-attachment: scroll;
   }
 }
 

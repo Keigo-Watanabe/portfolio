@@ -16,25 +16,11 @@ menuBar.addEventListener('click', () => {
 });
 
 
-// スムーススクロール
-const smoothScroll = document.querySelectorAll('.nav-list a[href^="#"]');
+// 開閉メニュー（開いた時の処理）
+const navBtn = document.querySelectorAll('a[href^="#"]');
 
-for(let i = 0; i < smoothScroll.length; i++){
-  smoothScroll[i].addEventListener('click', (e) => {
-    e.preventDefault();
-
-    let href = smoothScroll[i].getAttribute('href');
-    let targetElement = document.getElementById(href.replace('#', ''));
-
-    const rect = targetElement.getBoundingClientRect().top;
-    const offset = window.pageYOffset;
-    const headerHeight = document.getElementById('header').clientHeight;
-    const target = rect + offset - headerHeight;
-
-    window.scrollTo({
-      top: target,
-      behavior: 'smooth'
-    });
+for(let i = 0; i < navBtn.length; i++){
+  navBtn[i].addEventListener('click', () => {
 
     if (headerNav.classList.contains('nav-fadein') == true) {
       headerNav.classList.remove('nav-fadein');
@@ -111,3 +97,20 @@ function scrollTop(element, duration){
     }
   });
 }
+
+// スムーススクロール（jQuery）
+$(function(){
+
+  $('a[href^="#"]').click(function() {
+    let href = $(this).attr("href");
+    let target = $(href == "#" || href == "" ? 'html' : href);
+    let headerHeight = $('#header').innerHeight();
+    let position = target.offset().top - headerHeight;
+
+    $('body, html').animate({
+      scrollTop: position
+    }, 500, 'swing');
+    return false;
+  });
+
+});
